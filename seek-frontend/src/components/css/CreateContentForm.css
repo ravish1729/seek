@@ -14,10 +14,11 @@
 }
 
 .modal-content {
-    background-color: #1f1f1f;
+    background-color: var(--bg-modal);
     border-radius: 8px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-xl);
     position: relative;
+    border: 1px solid var(--border-primary);
 }
 
 .form-modal {
@@ -46,7 +47,7 @@
 .modal-header {
     flex-shrink: 0;
     padding: 1rem;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,7 +55,7 @@
 
 .modal-header h2 {
     margin: 0;
-    color: #fff;
+    color: var(--text-primary);
     font-size: 1.25rem;
     font-weight: 600;
 }
@@ -62,7 +63,7 @@
 .modal-close {
     background: none;
     border: none;
-    color: #888;
+    color: var(--text-secondary);
     font-size: 1.5rem;
     cursor: pointer;
     padding: 0.25rem;
@@ -76,8 +77,8 @@
 }
 
 .modal-close:hover {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
 }
 
 .modal-close:disabled {
@@ -88,7 +89,7 @@
 .modal-footer {
     flex-shrink: 0;
     padding: 1rem;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border-primary);
     gap: 0.75rem;
 }
 
@@ -99,7 +100,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: var(--text-primary);
     font-size: 0.875rem;
     font-weight: 500;
 }
@@ -109,12 +110,12 @@
 .form-group select {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #333;
+    border: 1px solid var(--border-primary);
     border-radius: 4px;
-    background-color: #2a2a2a;
-    color: #fff;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
     font-size: 0.875rem;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background-color 0.2s;
     box-sizing: border-box;
 }
 
@@ -122,12 +123,13 @@
 .form-group textarea:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--accent-primary);
+    background-color: var(--bg-card);
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: #666;
+    color: var(--text-tertiary);
 }
 
 .form-group input:disabled,
@@ -173,13 +175,13 @@
 /* File input styles */
 .form-group input[type="file"] {
     padding: 0.5rem;
-    background-color: #1f1f1f;
-    border: 2px dashed #333;
+    background-color: var(--bg-tertiary);
+    border: 2px dashed var(--border-primary);
     cursor: pointer;
 }
 
 .form-group input[type="file"]:hover {
-    border-color: #3b82f6;
+    border-color: var(--accent-primary);
 }
 
 .form-group input[type="file"]:disabled {
@@ -191,26 +193,26 @@
 .thumbnail-preview {
     margin-top: 0.5rem;
     padding: 0.75rem;
-    background-color: #1f1f1f;
+    background-color: var(--bg-tertiary);
     border-radius: 6px;
-    border: 1px solid #333;
+    border: 1px solid var(--border-primary);
     text-align: center;
 }
 
 .thumbnail-preview img {
     border-radius: 4px;
     margin-bottom: 0.5rem;
-    border: 1px solid #444;
+    border: 1px solid var(--border-secondary);
 }
 
 .thumbnail-preview p {
     margin: 0.25rem 0;
-    color: #ccc;
+    color: var(--text-secondary);
     font-size: 0.8rem;
 }
 
 .thumbnail-preview p:first-of-type {
-    color: #888;
+    color: var(--text-tertiary);
     font-size: 0.75rem;
 }
 
@@ -223,7 +225,7 @@
 }
 
 .description-textarea:focus {
-    border-color: #3b82f6;
+    border-color: var(--accent-primary);
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
 }
 
@@ -243,7 +245,7 @@
 .form-hint {
     display: block;
     margin-top: 0.25rem;
-    color: #888;
+    color: var(--text-tertiary);
     font-size: 0.75rem;
     line-height: 1.4;
 }
@@ -254,26 +256,27 @@
 }
 
 .form-group select option {
-    background-color: #2a2a2a;
-    color: #fff;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
 }
 
 .modal-button.secondary {
-    background-color: #4b5563;
-    color: white;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
 }
 
 .modal-button.secondary:hover {
-    background-color: #374151;
+    background-color: var(--border-primary);
 }
 
 .modal-button.primary {
-    background-color: #3b82f6;
-    color: white;
+    background-color: var(--accent-primary);
+    color: var(--text-inverse);
 }
 
 .modal-button.primary:hover {
-    background-color: #2563eb;
+    background-color: var(--accent-secondary);
 }
 
 .modal-button:disabled {

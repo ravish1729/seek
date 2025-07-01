@@ -1,28 +1,29 @@
 .content-detail {
     min-height: 100vh;
-    background: #18181b;
+    background: var(--bg-primary);
     padding: 20px;
 }
 
 .content-container {
     max-width: 1200px;
     margin: 0 auto;
-    background: #23232a;
+    background: var(--bg-card);
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: var(--shadow-xl);
     overflow: hidden;
+    border: 1px solid var(--border-primary);
 }
 
 .content-header {
     padding: 30px;
-    background: linear-gradient(135deg, #23232a 0%, #18181b 100%);
-    border-bottom: 1px solid #23232a;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+    border-bottom: 1px solid var(--border-primary);
 }
 
 .back-button {
     background: none;
     border: none;
-    color: #7dd3fc;
+    color: var(--accent-primary);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -32,13 +33,13 @@
 }
 
 .back-button:hover {
-    color: #38bdf8;
+    color: var(--accent-secondary);
 }
 
 .content-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #f3f4f6;
+    color: var(--text-primary);
     margin: 0;
     line-height: 1.2;
 }
@@ -59,15 +60,16 @@
 .thumbnail-container {
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    background: #18181b;
+    box-shadow: var(--shadow-lg);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-primary);
 }
 
 .content-thumbnail {
     width: 100%;
     height: auto;
     display: block;
-    background: #23232a;
+    background: var(--bg-secondary);
 }
 
 .content-actions {
@@ -83,10 +85,10 @@
 
 .vote-btn {
     padding: 12px 20px;
-    border: 2px solid #27272a;
+    border: 2px solid var(--border-primary);
     border-radius: 25px;
-    background: #23232a;
-    color: #e5e7eb;
+    background: var(--bg-card);
+    color: var(--text-primary);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -95,17 +97,17 @@
 
 .vote-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-md);
 }
 
 .vote-btn.upvote:hover:not(:disabled) {
-    border-color: #22d3ee;
-    color: #22d3ee;
+    border-color: var(--accent-success);
+    color: var(--accent-success);
 }
 
 .vote-btn.downvote:hover:not(:disabled) {
-    border-color: #f87171;
-    color: #f87171;
+    border-color: var(--accent-error);
+    color: var(--accent-error);
 }
 
 .vote-btn:disabled {
@@ -126,17 +128,17 @@
 }
 
 .info-section, .creator-section, .description-section {
-    background: #18181b;
+    background: var(--bg-secondary);
     padding: 25px;
     border-radius: 15px;
-    border: 1px solid #23232a;
+    border: 1px solid var(--border-primary);
 }
 
 .info-section h3, .creator-section h3, .description-section h3 {
     margin: 0 0 20px 0;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #f3f4f6;
+    color: var(--text-primary);
 }
 
 .info-grid {
@@ -149,7 +151,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid #23232a;
+    border-bottom: 1px solid var(--border-primary);
 }
 
 .info-item:last-child {
@@ -158,12 +160,12 @@
 
 .info-item .label {
     font-weight: 600;
-    color: #a1a1aa;
+    color: var(--text-secondary);
     min-width: 120px;
 }
 
 .info-item .value {
-    color: #f3f4f6;
+    color: var(--text-primary);
     text-align: right;
     word-break: break-all;
 }
@@ -182,16 +184,17 @@
 
 .public-key .label {
     font-weight: 600;
-    color: #a1a1aa;
+    color: var(--text-secondary);
 }
 
 .public-key .value {
     font-family: 'Courier New', monospace;
-    background: #23232a;
+    background: var(--bg-tertiary);
     padding: 10px;
     border-radius: 8px;
-    color: #f3f4f6;
+    color: var(--text-primary);
     word-break: break-all;
+    border: 1px solid var(--border-primary);
 }
 
 .creator-actions {
@@ -239,11 +242,11 @@
 
 .description-content {
     line-height: 1.6;
-    color: #e5e7eb;
+    color: var(--text-primary);
 }
 
 .description-content h1, .description-content h2, .description-content h3 {
-    color: #f3f4f6;
+    color: var(--text-primary);
     margin: 20px 0 10px 0;
 }
 
@@ -261,7 +264,7 @@
 }
 
 .description-content a {
-    color: #38bdf8;
+    color: var(--accent-primary);
     text-decoration: none;
 }
 
@@ -278,17 +281,17 @@
 }
 
 .comments-section {
-    background: #18181b;
+    background: var(--bg-secondary);
     padding: 25px;
     border-radius: 15px;
-    border: 1px solid #23232a;
+    border: 1px solid var(--border-primary);
 }
 
 .comments-section h3 {
     margin: 0 0 20px 0;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #f3f4f6;
+    color: var(--text-primary);
 }
 
 .comment-form {
@@ -301,19 +304,20 @@
 .comment-form textarea {
     width: 100%;
     padding: 15px;
-    border: 2px solid #23232a;
+    border: 2px solid var(--border-primary);
     border-radius: 10px;
     font-family: inherit;
     font-size: 14px;
     resize: vertical;
-    transition: border-color 0.3s ease;
-    background: #23232a;
-    color: #f3f4f6;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
 }
 
 .comment-form textarea:focus {
     outline: none;
-    border-color: #38bdf8;
+    border-color: var(--accent-primary);
+    background-color: var(--bg-card);
 }
 
 .submit-comment-btn {
@@ -347,10 +351,10 @@
 }
 
 .comment {
-    background: #23232a;
+    background: var(--bg-tertiary);
     padding: 20px;
     border-radius: 10px;
-    border: 1px solid #23232a;
+    border: 1px solid var(--border-primary);
 }
 
 .comment-header {
@@ -362,17 +366,17 @@
 
 .comment-author {
     font-weight: 600;
-    color: #7dd3fc;
+    color: var(--accent-primary);
     font-family: 'Courier New', monospace;
 }
 
 .comment-date {
-    color: #a1a1aa;
+    color: var(--text-secondary);
     font-size: 14px;
 }
 
 .comment-content {
-    color: #e5e7eb;
+    color: var(--text-primary);
     line-height: 1.5;
 }
 
@@ -382,11 +386,11 @@
     align-items: center;
     min-height: 400px;
     font-size: 1.2rem;
-    color: #e5e7eb;
+    color: var(--text-primary);
 }
 
 .error {
-    color: #f87171;
+    color: var(--accent-error);
 }
 
 /* Responsive Design */

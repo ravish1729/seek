@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { toast } from 'sonner';
 import { ConnectModal } from './ConnectModal';
 import { CreateContentForm } from './CreateContentForm';
+import { ThemeToggle } from './ThemeToggle';
 import './css/Header.css'
 
 export function Header() {
@@ -47,6 +48,7 @@ export function Header() {
                 <span>👀 Seek</span>
             </div>
             <div className="header-auth">
+                <ThemeToggle />
                 <button 
                     className="create-content-btn"
                     onClick={handleCreateContent}

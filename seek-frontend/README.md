@@ -38,6 +38,13 @@ A decentralized content discovery and sharing platform built with React and Web3
 - Support for various file types and categories
 - Tag-based categorization
 
+### Theme System
+- **Light and Dark Mode**: Toggle between light and dark themes
+- **System Preference**: Automatically detects user's system theme preference
+- **Persistent Storage**: Remembers user's theme choice across sessions
+- **Smooth Transitions**: Animated theme switching for better UX
+- **Accessibility**: High contrast ratios and proper color schemes for both themes
+
 ## Getting Started
 
 ### Prerequisites
