@@ -1,0 +1,43 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #1f1e1e;
+    width: 100%;
+    height: 50px;
+}
+
+.header-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.header-auth {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.create-content-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.create-content-btn:hover {
+    background-color: #2563eb;
+}
+
+.create-content-btn:active {
+    background-color: #1d4ed8;
+}
