@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { processImage, validateImageFile, ProcessedThumbnail } from '../utils/imageProcessor';
 import { searchMimeTypes } from '../utils/mimeTypes';
+import { searchCategories } from '../utils/categories';
 import './css/CreateContentForm.css';
 import { backendUrl } from '../lib/constants';
 import axios from 'axios';
@@ -24,7 +25,8 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
     const [formData, setFormData] = useState({
         hash: '',
         title: '',
-        type: '',
+        fileType: '',
+        fileCategory: '',
         description: '',
         fileSize: '',
         network: 'IPFS',
@@ -36,6 +38,8 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
     const [thumbnailError, setThumbnailError] = useState<string>('');
     const [typeSearchResults, setTypeSearchResults] = useState<string[]>([]);
     const [showTypeDropdown, setShowTypeDropdown] = useState(false);
+    const [categorySearchResults, setCategorySearchResults] = useState<string[]>([]);
+    const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 
     if (!isOpen) return null;
 
@@ -98,7 +102,7 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
 
     const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
-        setFormData(prev => ({ ...prev, type: value }));
+        setFormData(prev => ({ ...prev, fileType: value }));
         
         const results = searchMimeTypes(value);
         setTypeSearchResults(results);
@@ -106,9 +110,24 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
     };
 
     const selectMimeType = (mimeType: string) => {
-        setFormData(prev => ({ ...prev, type: mimeType }));
+        setFormData(prev => ({ ...prev, fileType: mimeType }));
         setShowTypeDropdown(false);
         setTypeSearchResults([]);
+    };
+
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setFormData(prev => ({ ...prev, fileCategory: value }));
+        
+        const results = searchCategories(value);
+        setCategorySearchResults(results);
+        setShowCategoryDropdown(results.length > 0);
+    };
+
+    const selectCategory = (category: string) => {
+        setFormData(prev => ({ ...prev, fileCategory: category }));
+        setShowCategoryDropdown(false);
+        setCategorySearchResults([]);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -143,7 +162,8 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
                 data: {
                     hash: formData.hash,
                     title: formData.title,
-                    type: formData.type,
+                    fileType: formData.fileType,
+                    fileCategory: formData.fileCategory,
                     description: formData.description,
                     fileSize: formData.fileSize ? `${formData.fileSize} ${sizeUnit}` : '',
                     network: formData.network,
@@ -166,7 +186,8 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
             setFormData({ 
                 hash: '', 
                 title: '', 
-                type: '', 
+                fileType: '', 
+                fileCategory: '',
                 description: '', 
                 fileSize: '', 
                 network: 'IPFS', 
@@ -177,6 +198,8 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
             setThumbnailError('');
             setTypeSearchResults([]);
             setShowTypeDropdown(false);
+            setCategorySearchResults([]);
+            setShowCategoryDropdown(false);
             onClose();
             
         } catch (error) {
@@ -192,7 +215,8 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
             setFormData({ 
                 hash: '', 
                 title: '', 
-                type: '', 
+                fileType: '', 
+                fileCategory: '',
                 description: '', 
                 fileSize: '', 
                 network: 'IPFS', 
@@ -203,6 +227,8 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
             setThumbnailError('');
             setTypeSearchResults([]);
             setShowTypeDropdown(false);
+            setCategorySearchResults([]);
+            setShowCategoryDropdown(false);
             onClose();
         }
     };
@@ -245,17 +271,17 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="type">Type</label>
+                            <label htmlFor="fileType">File Type</label>
                             <div className="type-input-container">
                                 <input
                                     type="text"
-                                    id="type"
-                                    name="type"
-                                    value={formData.type}
+                                    id="fileType"
+                                    name="fileType"
+                                    value={formData.fileType}
                                     onChange={handleTypeChange}
                                     onFocus={() => {
-                                        if (formData.type.trim()) {
-                                            const results = searchMimeTypes(formData.type);
+                                        if (formData.fileType.trim()) {
+                                            const results = searchMimeTypes(formData.fileType);
                                             setTypeSearchResults(results);
                                             setShowTypeDropdown(results.length > 0);
                                         }
@@ -283,6 +309,47 @@ export function CreateContentForm({ isOpen, onClose }: CreateContentFormProps) {
                             </div>
                             <small className="form-hint">
                                 Start typing to search for MIME types (e.g., "image" for image types, "zip" for archives)
+                            </small>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="fileCategory">File Category</label>
+                            <div className="type-input-container">
+                                <input
+                                    type="text"
+                                    id="fileCategory"
+                                    name="fileCategory"
+                                    value={formData.fileCategory}
+                                    onChange={handleCategoryChange}
+                                    onFocus={() => {
+                                        if (formData.fileCategory.trim()) {
+                                            const results = searchCategories(formData.fileCategory);
+                                            setCategorySearchResults(results);
+                                            setShowCategoryDropdown(results.length > 0);
+                                        }
+                                    }}
+                                    onBlur={() => {
+                                        // Delay hiding dropdown to allow clicks
+                                        setTimeout(() => setShowCategoryDropdown(false), 200);
+                                    }}
+                                    disabled={isSubmitting}
+                                    placeholder="Search for category (e.g., website, dataset, image, video)"
+                                />
+                                {showCategoryDropdown && categorySearchResults.length > 0 && (
+                                    <div className="type-dropdown">
+                                        {categorySearchResults.map((category, index) => (
+                                            <div
+                                                key={index}
+                                                className="type-option"
+                                                onClick={() => selectCategory(category)}
+                                            >
+                                                {category}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            <small className="form-hint">
+                                Start typing to search for categories (e.g., "website", "dataset", "image", "video")
                             </small>
                         </div>
                         <div className="form-group">
