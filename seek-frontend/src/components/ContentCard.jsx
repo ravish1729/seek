@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './css/ContentCard.css';
 
 const ContentCard = ({
@@ -16,6 +17,7 @@ const ContentCard = ({
   updated_at,
   title = `Content ${id}` // Default title if not provided
 }) => {
+  const navigate = useNavigate();
   // Generate dummy thumbnail if none provided
   const generateDummyThumbnail = () => {
     const canvas = document.createElement('canvas');
@@ -54,8 +56,12 @@ const ContentCard = ({
 
   const thumbnailUrl = thumbnail || generateDummyThumbnail();
 
+  const handleCardClick = () => {
+    navigate(`/${metadata_cid}`);
+  };
+
   return (
-    <div className="content-card">
+    <div className="content-card" onClick={handleCardClick}>
       <div className="card-thumbnail">
         <img 
           src={thumbnailUrl} 

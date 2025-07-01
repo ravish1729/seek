@@ -1,12 +1,127 @@
-# React + Vite
+# Seek Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A decentralized content discovery and sharing platform built with React and Web3 technologies.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Content Discovery
+- Browse content in a responsive grid layout
+- View content thumbnails, titles, and metadata
+- Filter by network (IPFS, Arweave)
+- Search functionality
 
-## Expanding the ESLint configuration
+### Content Detail Page
+- **URL Structure**: `/metadata_cid` - Navigate to specific content using its metadata CID
+- **Content Information Display**:
+  - Thumbnail image
+  - Title and description (with markdown support)
+  - File type, category, size, and network
+  - License information
+  - Creator's public key
+  - Upvotes and downvotes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### User Interaction
+- **Voting System**: Upvote/downvote content (requires wallet connection)
+- **Comments**: Add comments on content (requires wallet connection)
+- **Creator Actions**:
+  - **Tip Button**: Send tips to content creators (coming soon)
+  - **Mint Button**: Only visible to content owners (coming soon)
+
+### Authentication
+- Web3 wallet integration (RainbowKit)
+- Secure authentication flow with signature verification
+- Persistent login state
+
+### Content Creation
+- Upload content with metadata
+- AI thumbnail generation (coming soon)
+- Support for various file types and categories
+- Tag-based categorization
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+```bash
+npm install
+```
+
+### Development
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
+
+### Building for Production
+```bash
+npm run build
+```
+
+## Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ContentCard.jsx  # Content card component (clickable)
+│   ├── ContentList.jsx  # Grid layout for content display
+│   ├── Header.tsx       # Navigation header
+│   └── ...
+├── pages/              # Page components
+│   ├── Home.jsx        # Home page with content list
+│   ├── ContentDetail.jsx # Content detail page
+│   └── ...
+├── hooks/              # Custom React hooks
+│   ├── useAuth.ts      # Authentication logic
+│   ├── useWallet.ts    # Wallet connection
+│   └── ...
+└── ...
+```
+
+## API Integration
+
+### Content Detail Page
+The content detail page fetches data from two endpoints:
+
+1. **Content Data**: `GET /api/v1/content/{metadata_cid}`
+   - Returns content metadata, creator info, and statistics
+   - Currently using dummy data with TODO comments for API integration
+
+2. **Comments**: `GET /api/v1/content/{metadata_cid}/comments`
+   - Returns array of comments with user addresses
+   - Currently using dummy data with TODO comments for API integration
+
+### Comment Submission
+- **Endpoint**: `POST /api/v1/content/{metadata_cid}/comments`
+- **Authentication**: Requires Bearer token
+- **Payload**: `{ comment: string }`
+
+## Responsive Design
+
+The application is fully responsive and works on:
+- Desktop (1200px+)
+- Tablet (768px - 1199px)
+- Mobile (480px - 767px)
+- Small mobile (< 480px)
+
+## Technologies Used
+
+- **React 19** - UI framework
+- **React Router** - Client-side routing
+- **RainbowKit** - Web3 wallet integration
+- **Wagmi** - React hooks for Ethereum
+- **Axios** - HTTP client
+- **React Markdown** - Markdown rendering
+- **Vite** - Build tool and dev server
+
+## Future Enhancements
+
+- [ ] AI thumbnail generation
+- [ ] Tip functionality implementation
+- [ ] Mint/NFT functionality
+- [ ] Advanced search and filtering
+- [ ] User profiles and reputation system
+- [ ] Content recommendations
