@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './css/Search.css'
+import { backendUrl } from '../lib/constants';
+import axios from 'axios';
 
 export function Search() {
     const [searchInput, setSearchInput] = useState('');
@@ -8,11 +10,10 @@ export function Search() {
         setSearchInput(e.target.value);
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyDown = async(e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            console.log('Search executed with:', searchInput);
-            // Add your search logic here
-            // For example: performSearch(searchInput);
+            const response = await axios.get(`${backendUrl}/api/v1/search/search_content?query=${searchInput}`);
+            console.log(response.data.value);
         }
     };
 

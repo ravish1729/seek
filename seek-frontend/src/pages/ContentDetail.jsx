@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../contexts/AuthContext';
 import { useWallet } from '../hooks/useWallet';
 import { Header } from '../components/Header';
 import ReactMarkdown from 'react-markdown';
@@ -31,28 +31,6 @@ const ContentDetail = () => {
             const response = await axios.get(`${backendUrl}/api/v1/content/get_content_information?metadata_cid=${metadata_cid}`);
             console.log(response.data.value);
             setContent(response.data.value);
-            
-            // Dummy data for now
-            // const dummyContent = {
-            //     id: 1,
-            //     user_id: 101,
-            //     hash: "QmX123456789abcdef",
-            //     title: "Amazing Digital Art Collection - A Journey Through Abstract Realms",
-            //     file_size: "2.5 MB",
-            //     network: "IPFS",
-            //     upvotes: 42,
-            //     downvotes: 3,
-            //     comment_count: 8,
-            //     file_type: "image/png",
-            //     file_category: "Art",
-            //     thumbnail: "https://picsum.photos/400/300?random=1",
-            //     metadata_cid: metadata_cid,
-            //     created_at: "2024-01-15T10:30:00Z",
-            //     updated_at: "2024-01-15T10:30:00Z",
-            //     public_key: "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6",
-            //     description: "This is an **amazing** collection of digital art that explores the boundaries of *abstract expressionism*. The pieces showcase:\n\n- **Bold colors** and dynamic compositions\n- *Innovative techniques* using modern tools\n- [Link to artist portfolio](https://example.com)\n\nCreated using cutting-edge digital tools and stored securely on IPFS for permanent accessibility.",
-            //     license: "Creative Commons Attribution 4.0"
-            // };
             
             // setContent(dummyContent);
             setUpvotes(response.data.value.upvotes);
@@ -181,7 +159,7 @@ const ContentDetail = () => {
                         {content.thumbnail && (
                             <div className="thumbnail-container">
                                 <img 
-                                    src={content.thumbnail} 
+                                    src={content.thumbnail ? `http://103.194.228.64/ipfs/${content.thumbnail}` : content.thumbnail} 
                                     alt={content.title}
                                     className="content-thumbnail"
                                 />

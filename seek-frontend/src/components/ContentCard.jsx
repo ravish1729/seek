@@ -54,7 +54,7 @@ const ContentCard = ({
     return canvas.toDataURL();
   };
 
-  const thumbnailUrl = thumbnail || generateDummyThumbnail();
+  const thumbnailUrl = thumbnail ? `http://103.194.228.64/ipfs/${thumbnail}` : generateDummyThumbnail();
 
   const handleCardClick = () => {
     navigate(`/${metadata_cid}`);

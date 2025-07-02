@@ -11,7 +11,7 @@ const ContentList = () => {
     const fetchContent = async () => {
       try {
         const response = await axios.get(`${backendUrl}/api/v1/content/explore_content?by=latest`);
-        console.log(response);
+        console.log(response.data.value);
         setContent(response.data.value || []);
       } catch (error) {
         console.error('Error fetching content:', error);
