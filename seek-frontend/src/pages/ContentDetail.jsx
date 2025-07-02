@@ -166,7 +166,8 @@ const ContentDetail = () => {
 
     return (
         <div className="content-detail">
-            {/* <Header /> */}
+            <Header />
+            <br/>
             <div className="content-container">
                 <div className="content-header">
                     <button className="back-button" onClick={() => navigate('/')}>
