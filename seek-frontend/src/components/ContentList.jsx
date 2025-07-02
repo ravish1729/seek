@@ -4,7 +4,7 @@ import './css/ContentList.css';
 import axios from 'axios';
 import { backendUrl } from '../lib/constants';
 
-const ContentList = () => {
+const ContentList = ({ searchResults, isSearching }) => {
   const [content, setContent] = useState([]);
   
   useEffect(() => {
@@ -18,19 +18,36 @@ const ContentList = () => {
         setContent([]);
       }
     };
-    fetchContent();
-  }, []);
+    
+    // Only fetch default content if not searching
+    if (!isSearching) {
+      fetchContent();
+    }
+  }, [isSearching]);
+
+  // Use search results if available, otherwise use default content
+  const displayContent = isSearching ? (searchResults || []) : content;
 
   return (
     <div className="content-list">
+      {isSearching && (
+        <div className="search-results-header">
+          <h3>Search Results ({displayContent.length} items)</h3>
+        </div>
+      )}
       <div className="content-grid">
-        {content.map((contentItem) => (
+        {displayContent.map((contentItem) => (
           <ContentCard
             key={contentItem.id}
             {...contentItem}
           />
         ))}
       </div>
+      {isSearching && displayContent.length === 0 && (
+        <div className="no-results">
+          <p>No results found for your search.</p>
+        </div>
+      )}
     </div>
   );
 };
