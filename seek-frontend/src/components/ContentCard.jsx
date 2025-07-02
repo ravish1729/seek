@@ -9,7 +9,7 @@ const ContentCard = ({
   file_size,
   network,
   upvotes,
-  comments_count,
+  comment_count,
   downvotes,
   thumbnail,
   metadata_cid,
@@ -91,7 +91,7 @@ const ContentCard = ({
           
           <div className="stat-item">
             <span className="stat-icon">💬</span>
-            <span className="stat-value">{comments_count}</span>
+            <span className="stat-value">{comment_count}</span>
           </div>
         </div>
         

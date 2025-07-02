@@ -24,40 +24,42 @@ const ContentDetail = () => {
 
     useEffect(() => {
         fetchContent();
-        fetchComments();
     }, [metadata_cid]);
 
     const fetchContent = async () => {
         try {
-            // TODO: Replace with actual API call
-            // const response = await axios.get(`${backendUrl}/api/v1/content/${metadata_cid}`);
-            // setContent(response.data);
+            const response = await axios.get(`${backendUrl}/api/v1/content/get_content_information?metadata_cid=${metadata_cid}`);
+            console.log(response.data.value);
+            setContent(response.data.value);
             
             // Dummy data for now
-            const dummyContent = {
-                id: 1,
-                user_id: 101,
-                hash: "QmX123456789abcdef",
-                title: "Amazing Digital Art Collection - A Journey Through Abstract Realms",
-                file_size: "2.5 MB",
-                network: "IPFS",
-                upvotes: 42,
-                downvotes: 3,
-                comment_count: 8,
-                file_type: "image/png",
-                file_category: "Art",
-                thumbnail: "https://picsum.photos/400/300?random=1",
-                metadata_cid: metadata_cid,
-                created_at: "2024-01-15T10:30:00Z",
-                updated_at: "2024-01-15T10:30:00Z",
-                public_key: "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6",
-                description: "This is an **amazing** collection of digital art that explores the boundaries of *abstract expressionism*. The pieces showcase:\n\n- **Bold colors** and dynamic compositions\n- *Innovative techniques* using modern tools\n- [Link to artist portfolio](https://example.com)\n\nCreated using cutting-edge digital tools and stored securely on IPFS for permanent accessibility.",
-                license: "Creative Commons Attribution 4.0"
-            };
+            // const dummyContent = {
+            //     id: 1,
+            //     user_id: 101,
+            //     hash: "QmX123456789abcdef",
+            //     title: "Amazing Digital Art Collection - A Journey Through Abstract Realms",
+            //     file_size: "2.5 MB",
+            //     network: "IPFS",
+            //     upvotes: 42,
+            //     downvotes: 3,
+            //     comment_count: 8,
+            //     file_type: "image/png",
+            //     file_category: "Art",
+            //     thumbnail: "https://picsum.photos/400/300?random=1",
+            //     metadata_cid: metadata_cid,
+            //     created_at: "2024-01-15T10:30:00Z",
+            //     updated_at: "2024-01-15T10:30:00Z",
+            //     public_key: "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6",
+            //     description: "This is an **amazing** collection of digital art that explores the boundaries of *abstract expressionism*. The pieces showcase:\n\n- **Bold colors** and dynamic compositions\n- *Innovative techniques* using modern tools\n- [Link to artist portfolio](https://example.com)\n\nCreated using cutting-edge digital tools and stored securely on IPFS for permanent accessibility.",
+            //     license: "Creative Commons Attribution 4.0"
+            // };
             
-            setContent(dummyContent);
-            setUpvotes(dummyContent.upvotes);
-            setDownvotes(dummyContent.downvotes);
+            // setContent(dummyContent);
+            setUpvotes(response.data.value.upvotes);
+            setDownvotes(response.data.value.downvotes);
+            
+            // Fetch comments after content is loaded
+            await fetchComments(response.data.value.id);
         } catch (error) {
             console.error('Error fetching content:', error);
         } finally {
@@ -65,38 +67,11 @@ const ContentDetail = () => {
         }
     };
 
-    const fetchComments = async () => {
+    const fetchComments = async (contentId) => {
         try {
-            // TODO: Replace with actual API call
-            // const response = await axios.get(`${backendUrl}/api/v1/content/${metadata_cid}/comments`);
-            // setComments(response.data);
-            
-            // Dummy comments data
-            const dummyComments = [
-                {
-                    id: 1,
-                    user_id: 102,
-                    user_address: "0x1234567890abcdef1234567890abcdef12345678",
-                    comment: "This is absolutely stunning! The use of colors is incredible.",
-                    created_at: "2024-01-15T11:00:00Z"
-                },
-                {
-                    id: 2,
-                    user_id: 103,
-                    user_address: "0xabcdef1234567890abcdef1234567890abcdef12",
-                    comment: "I love the abstract nature of these pieces. Great work!",
-                    created_at: "2024-01-15T12:30:00Z"
-                },
-                {
-                    id: 3,
-                    user_id: 104,
-                    user_address: "0x9876543210fedcba9876543210fedcba98765432",
-                    comment: "The composition is really well thought out. Each piece tells a story.",
-                    created_at: "2024-01-15T14:15:00Z"
-                }
-            ];
-            
-            setComments(dummyComments);
+            const response = await axios.get(`${backendUrl}/api/v1/content/get_comments?content_id=${contentId}`);
+            console.log(response.data.value);
+            setComments(response.data.value);
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
@@ -108,25 +83,17 @@ const ContentDetail = () => {
 
         setIsSubmittingComment(true);
         try {
-            // TODO: Replace with actual API call
-            // const response = await axios.post(`${backendUrl}/api/v1/content/${metadata_cid}/comments`, {
-            //     comment: newComment
-            // }, {
-            //     headers: {
-            //         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-            //     }
-            // });
+            const response = await axios.post(`${backendUrl}/api/v1/content/post_comment`, {data: {
+                content_id: content.id,
+                comment: newComment
+            }}, { 
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            });
             
-            // Add comment to local state (dummy)
-            const newCommentObj = {
-                id: comments.length + 1,
-                user_id: 999,
-                user_address: address,
-                comment: newComment,
-                created_at: new Date().toISOString()
-            };
-            
-            setComments(prev => [newCommentObj, ...prev]);
+            // Refresh comments after successful submission
+            await fetchComments(content.id);
             setNewComment('');
         } catch (error) {
             console.error('Error submitting comment:', error);
@@ -135,20 +102,30 @@ const ContentDetail = () => {
         }
     };
 
-    const handleUpvote = () => {
+    const handleUpvote = async () => {
         if (!isAuthenticated) {
             alert('Please connect your wallet to vote');
             return;
         }
         setUpvotes(prev => prev + 1);
+        const response = await axios.get(`${backendUrl}/api/v1/content/upvote_content?content_id=${content.id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            }
+        });
     };
 
-    const handleDownvote = () => {
+    const handleDownvote = async () => {
         if (!isAuthenticated) {
             alert('Please connect your wallet to vote');
             return;
         }
         setDownvotes(prev => prev + 1);
+        const response = await axios.get(`${backendUrl}/api/v1/content/downvote_content?content_id=${content.id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            }
+        });
     };
 
     const handleTip = () => {
@@ -332,7 +309,7 @@ const ContentDetail = () => {
                                     <div key={comment.id} className="comment">
                                         <div className="comment-header">
                                             <span className="comment-author">
-                                                {comment.user_address.slice(0, 6)}...{comment.user_address.slice(-4)}
+                                                {comment.public_key.slice(0, 6)}...{comment.public_key.slice(-4)}
                                             </span>
                                             <span className="comment-date">
                                                 {new Date(comment.created_at).toLocaleDateString()}
