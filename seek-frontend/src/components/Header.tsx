@@ -3,6 +3,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useUserPoints } from '../hooks/useUserPoints';
+import { useUserTips } from '../hooks/useUserTips';
 import { ConnectModal } from './ConnectModal';
 import { CreateContentForm } from './CreateContentForm';
 import { ThemeToggle } from './ThemeToggle';
@@ -11,6 +12,7 @@ import './css/Header.css'
 export function Header() {
     const { isAuthenticated } = useAuth();
     const { points, loading } = useUserPoints();
+    const { tips, loading: tipsLoading } = useUserTips();
     const navigate = useNavigate();
     const [showConnectModal, setShowConnectModal] = useState(false);
     const [showContentForm, setShowContentForm] = useState(false);
@@ -33,16 +35,26 @@ export function Header() {
                 <span>👀 Seek</span>
             </div>
             <div className="header-auth">
-                <ThemeToggle />
                 {isAuthenticated && (
-                    <div className="user-points">
-                        {loading ? (
-                            <span className="points-loading">Loading...</span>
-                        ) : (
-                            <span className="points-display">
-                                💎 {points !== null ? points : 0} points
-                            </span>
-                        )}
+                    <div className="user-stats">
+                        <div className="user-points">
+                            {loading ? (
+                                <span className="points-loading">Loading...</span>
+                            ) : (
+                                <span className="points-display">
+                                    💎 {points !== null ? points : 0} points
+                                </span>
+                            )}
+                        </div>
+                        <div className="user-tips">
+                            {tipsLoading ? (
+                                <span className="tips-loading">Loading...</span>
+                            ) : (
+                                <span className="tips-display">
+                                    💰 {tips !== null ? tips.toFixed(4) : '0.0000'} FIL
+                                </span>
+                            )}
+                        </div>
                     </div>
                 )}
                 <button 
@@ -52,6 +64,7 @@ export function Header() {
                     Create Content
                 </button>
                 <ConnectButton />
+                <ThemeToggle />
             </div>
             
             <ConnectModal 
