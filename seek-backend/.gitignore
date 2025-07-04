@@ -1,0 +1,12 @@
+node_modules/
+.env
+.vscode/
+dist/
+logs/
+combined.log
+dump.rdb
+uploads
+data/
+*.db
+*.sqlite
+*.sqlite3
