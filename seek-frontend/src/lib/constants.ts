@@ -1,4 +1,4 @@
-export const backendUrl = 'http://localhost:8000';
+export const backendUrl = 'http://103.194.228.64:8000';
 
 // Tip contract configuration
 export const TIP_CONTRACT_ADDRESS = '0x0C1Edf2b7A1845c3dF7cEc30e73c92283EA1F594'; // TODO: Update with deployed contract address
