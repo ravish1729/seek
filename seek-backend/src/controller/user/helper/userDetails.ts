@@ -1,0 +1,1 @@
+import CustomError from '../../../middlewares/error/customError.js'
