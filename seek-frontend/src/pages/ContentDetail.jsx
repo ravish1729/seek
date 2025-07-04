@@ -6,7 +6,7 @@ import { Header } from '../components/Header';
 import { TipModal } from '../components/TipModal';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
-import { backendUrl, TIP_CONTRACT_ADDRESS } from '../lib/constants';
+import { backendUrl, TIP_CONTRACT_ADDRESS, ipfsUrl } from '../lib/constants';
 import { TIP_CONTRACT_ABI } from '../lib/tipABI';
 import { useContractRead } from 'wagmi';
 import './css/ContentDetail.css';
@@ -185,7 +185,7 @@ const ContentDetail = () => {
                         {content.thumbnail && (
                             <div className="thumbnail-container">
                                 <img 
-                                    src={content.thumbnail ? `http://103.194.228.64/ipfs/${content.thumbnail}` : content.thumbnail} 
+                                    src={content.thumbnail ? `${ipfsUrl}/ipfs/${content.thumbnail}` : content.thumbnail} 
                                     alt={content.title}
                                     className="content-thumbnail"
                                 />

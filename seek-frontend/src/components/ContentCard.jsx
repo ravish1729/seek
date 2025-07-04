@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './css/ContentCard.css';
+import { ipfsUrl } from '../lib/constants';
 
 const ContentCard = ({
   id,
@@ -54,7 +55,7 @@ const ContentCard = ({
     return canvas.toDataURL();
   };
 
-  const thumbnailUrl = thumbnail ? `http://103.194.228.64/ipfs/${thumbnail}` : generateDummyThumbnail();
+  const thumbnailUrl = thumbnail ? `${ipfsUrl}/ipfs/${thumbnail}` : generateDummyThumbnail();
 
   const handleCardClick = () => {
     navigate(`/${metadata_cid}`);
