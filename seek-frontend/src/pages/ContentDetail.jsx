@@ -3,9 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useWallet } from '../hooks/useWallet';
 import { Header } from '../components/Header';
+import { TipModal } from '../components/TipModal';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
-import { backendUrl } from '../lib/constants';
+import { backendUrl, TIP_CONTRACT_ADDRESS } from '../lib/constants';
+import { TIP_CONTRACT_ABI } from '../lib/tipABI';
+import { useContractRead } from 'wagmi';
 import './css/ContentDetail.css';
 
 const ContentDetail = () => {
@@ -21,6 +24,16 @@ const ContentDetail = () => {
     const [isSubmittingComment, setIsSubmittingComment] = useState(false);
     const [upvotes, setUpvotes] = useState(0);
     const [downvotes, setDownvotes] = useState(0);
+    const [isTipModalOpen, setIsTipModalOpen] = useState(false);
+
+    // Fetch total tips received by the content creator
+    const { data: totalTipsReceived, isLoading: isLoadingTips } = useContractRead({
+        address: TIP_CONTRACT_ADDRESS,
+        abi: TIP_CONTRACT_ABI,
+        functionName: 'getTotalTipsReceived',
+        args: content?.public_key ? [content.public_key] : undefined,
+        enabled: !!content?.public_key,
+    });
 
     useEffect(() => {
         fetchContent();
@@ -111,7 +124,7 @@ const ContentDetail = () => {
             alert('Please connect your wallet to tip');
             return;
         }
-        alert('Tip functionality coming soon!');
+        setIsTipModalOpen(true);
     };
 
     const handleMint = () => {
@@ -147,6 +160,12 @@ const ContentDetail = () => {
             <Header />
             <br/>
             <div className="content-container">
+                <TipModal
+                    isOpen={isTipModalOpen}
+                    onClose={() => setIsTipModalOpen(false)}
+                    recipientAddress={content.public_key}
+                    recipientName={content.title}
+                />
                 <div className="content-header">
                     <button className="back-button" onClick={() => navigate('/')}>
                         ← Back to Home
@@ -225,20 +244,34 @@ const ContentDetail = () => {
                             </div>
 
                             <div className="creator-section">
-                                <h3>Creator</h3>
+                                <h3>Owner</h3>
                                 <div className="creator-info">
                                     <div className="public-key">
                                         <span className="label">Public Key:</span>
                                         <span className="value">{content.public_key}</span>
                                     </div>
+                                    <div className="tips-info">
+                                        <span className="label">Total Tips Received:</span>
+                                        <span className="value">
+                                            {isLoadingTips ? (
+                                                'Loading...'
+                                            ) : (
+                                                totalTipsReceived ? 
+                                                    `${(Number(totalTipsReceived) / 1e18).toFixed(4)} FIL` : 
+                                                    '0 FIL'
+                                            )}
+                                        </span>
+                                    </div>
                                     <div className="creator-actions">
-                                        <button 
-                                            className="action-btn tip-btn"
-                                            onClick={handleTip}
-                                            disabled={!isAuthenticated}
-                                        >
-                                            💰 Tip
-                                        </button>
+                                        {!isOwner && (
+                                            <button 
+                                                className="action-btn tip-btn"
+                                                onClick={handleTip}
+                                                disabled={!isAuthenticated}
+                                            >
+                                                💰 Tip
+                                            </button>
+                                        )}
                                         {isOwner && (
                                             <button 
                                                 className="action-btn mint-btn"

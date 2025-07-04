@@ -197,6 +197,28 @@
     border: 1px solid var(--border-primary);
 }
 
+.tips-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.tips-info .label {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.tips-info .value {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: var(--bg-tertiary);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-primary);
+}
+
 .creator-actions {
     display: flex;
     gap: 15px;
