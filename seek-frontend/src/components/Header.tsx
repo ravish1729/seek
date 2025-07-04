@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useUserPoints } from '../hooks/useUserPoints';
 import { ConnectModal } from './ConnectModal';
@@ -10,6 +11,7 @@ import './css/Header.css'
 export function Header() {
     const { isAuthenticated } = useAuth();
     const { points, loading } = useUserPoints();
+    const navigate = useNavigate();
     const [showConnectModal, setShowConnectModal] = useState(false);
     const [showContentForm, setShowContentForm] = useState(false);
 
@@ -21,9 +23,13 @@ export function Header() {
         }
     };
 
+    const handleLogoClick = () => {
+        navigate('/');
+    };
+
     return (
         <div className="header">
-            <div className="header-logo">
+            <div className="header-logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
                 <span>👀 Seek</span>
             </div>
             <div className="header-auth">
