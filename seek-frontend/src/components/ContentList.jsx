@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ContentCard from './ContentCard';
+import AdCard from './AdCard';
 import './css/ContentList.css';
 import axios from 'axios';
 import { backendUrl } from '../lib/constants';
@@ -42,6 +43,7 @@ const ContentList = ({ searchResults, isSearching }) => {
             {...contentItem}
           />
         ))}
+        {isSearching && displayContent.length > 0 && <AdCard />}
       </div>
       {isSearching && displayContent.length === 0 && (
         <div className="no-results">
