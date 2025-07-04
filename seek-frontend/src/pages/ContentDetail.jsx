@@ -135,6 +135,13 @@ const ContentDetail = () => {
         alert('Mint functionality coming soon!');
     };
 
+    const handleOpenColab = () => {
+        if (content.hash) {
+            const colabUrl = `https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb`;
+            window.open(colabUrl, '_blank');
+        }
+    };
+
     if (isLoading) {
         return (
             <div className="content-detail">
@@ -202,6 +209,16 @@ const ContentDetail = () => {
                                     👎 {downvotes}
                                 </button>
                             </div>
+                            {content.file_category === 'dataset' && (
+                                <div className="dataset-actions">
+                                    <button 
+                                        className="action-btn colab-btn"
+                                        onClick={handleOpenColab}
+                                    >
+                                        📊 Open with Colab
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -210,6 +227,12 @@ const ContentDetail = () => {
                             <div className="info-section">
                                 <h3>Content Information</h3>
                                 <div className="info-grid">
+                                    {content.hash && (
+                                        <div className="info-item">
+                                            <span className="label">Hash:</span>
+                                            <span className="value">{content.hash}</span>
+                                        </div>
+                                    )}
                                     {content.file_type && (
                                         <div className="info-item">
                                             <span className="label">File Type:</span>
