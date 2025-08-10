@@ -4,8 +4,6 @@ require("hardhat-deploy-ethers");
 require("dotenv").config();
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const CALIBRATION_URL = process.env.CALIBRATION_URL;
-const CHAIN_ID = process.env.CHAIN_ID;
 
 module.exports = {
   solidity: {
@@ -17,11 +15,11 @@ module.exports = {
       },
     },
   },
-  defaultNetwork: "Calibration",
+  defaultNetwork: "Polygon",
   networks: {
-    Calibration: {
-      chainId: parseInt(CHAIN_ID),
-      url: CALIBRATION_URL,
+    Polygon: {
+      chainId: 137,
+      url: "https://polygon.rpc.subquery.network/public",
       accounts: [PRIVATE_KEY],
     },
   },
@@ -31,4 +29,7 @@ module.exports = {
     cache: "./cache",
     artifacts: "./artifacts",
   },
+  etherscan: { 
+    apiKey: process.env.POLYGONSCAN_API_KEY 
+  }
 };

@@ -13,5 +13,6 @@ npx hardhat ignition deploy ./ignition/modules/FilecoinContentNFT.js
 npx hardhat compile
 npx hardhat run scripts/deploy.js --network Calibration
 npx hardhat run scripts/interact.js --network Calibration
+npx hardhat verify --network Polygon 0x0C1Edf2b7A1845c3dF7cEc30e73c92283EA1F594
 ```
 TipModule#Tip - 0x0C1Edf2b7A1845c3dF7cEc30e73c92283EA1F594
