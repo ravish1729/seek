@@ -2,7 +2,7 @@
 
 > An incentive-based file tagging application for the Filecoin/IPFS ecosystem
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Available-brightgreen)](https://seek-six.vercel.app/)
+[![App Link](https://img.shields.io/badge/Live%20Demo-Available-brightgreen)](https://seek-six.vercel.app/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Overview
@@ -15,6 +15,8 @@ Seek solves the critical problem of file discovery and search in the Filecoin/IP
 - **Community Socialization**: Engage with content through likes and comments
 - **Incentivized Content Creation**: Rewards contributors for valuable content
 - **Efficient Discovery**: Advanced search capabilities for Filecoin/IPFS content
+
+**App Link**: [https://seek-six.vercel.app/](https://seek-six.vercel.app/)
 
 ## Features
 
@@ -31,7 +33,6 @@ Seek solves the critical problem of file discovery and search in the Filecoin/IP
 ### ❤️ Likes and Comments
 - Like and upvote valuable content to show appreciation
 - Comment system for community discussions and feedback
-- Engagement tracking to identify trending content
 - Community-driven content curation through interactions
 
 ## How It Works
@@ -45,8 +46,7 @@ Seek solves the critical problem of file discovery and search in the Filecoin/IP
 
 2. **Smart Contract Integration**
    - FVM (Filecoin Virtual Machine) for Tip contract deployment
-- RainbowKit for seamless wallet interactions
-- Automated reward distribution
+   - RainbowKit for seamless wallet interactions
 
 3. **Search & Discovery**
    - Real-time search across indexed content
@@ -63,12 +63,11 @@ Seek solves the critical problem of file discovery and search in the Filecoin/IP
 ### Backend
 - **Node.js** - Server runtime
 - **TypeScript** - Type-safe development
-- **PostgreSQL/SQLite** - Database management
+- **SQLite** - Database management
 - **Redis** - Caching layer
 
 ### Blockchain
 - **Filecoin** - Decentralized storage
-- **IPFS** - Content addressing
 - **FVM** - Smart contract execution
 - **Lighthouse** - Permanent metadata storage
 
@@ -129,8 +128,6 @@ Seek solves the critical problem of file discovery and search in the Filecoin/IP
 2. Access and download content directly from Filecoin/IPFS
 3. Tip creators for valuable contributions
 4. Use content in your Web2/Web3 projects
-
-- **Live Demo**: [https://seek-six.vercel.app/](https://seek-six.vercel.app/)
 
 ## Roadmap
 
