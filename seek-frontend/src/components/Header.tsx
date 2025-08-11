@@ -46,7 +46,7 @@ export function Header() {
     return (
         <div className="header">
             <div className="header-logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-                <span>👀 Seek</span>
+                <span>👀 SurfHash</span>
             </div>
             <div className="header-auth">
                 <button 
