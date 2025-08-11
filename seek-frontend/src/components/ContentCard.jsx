@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './css/ContentCard.css';
 import { ipfsUrl } from '../lib/constants';
+import { formatFileSize } from '../utils/fileSize';
 
 const ContentCard = ({
   id,
@@ -98,7 +99,7 @@ const ContentCard = ({
         
         <div className="card-meta">
           <span className="network-badge">{network}</span>
-          <span className="file-size">{file_size}</span>
+          <span className="file-size">{formatFileSize(file_size)}</span>
         </div>
       </div>
     </div>
