@@ -140,7 +140,7 @@ export function TipModal({ isOpen, onClose, recipientAddress, recipientName }: T
 
                     <form onSubmit={handleSubmit} className="tip-form">
                         <div className="form-group">
-                            <label htmlFor="amount">Amount (FIL)</label>
+                            <label htmlFor="amount">Amount (POL)</label>
                             <input
                                 type="number"
                                 id="amount"
