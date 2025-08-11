@@ -2,7 +2,7 @@
 
 > An incentive-based file tagging application for the Filecoin/IPFS ecosystem
 
-[![App Link](https://img.shields.io/badge/Live%20Demo-Available-brightgreen)](https://seek-six.vercel.app/)
+[![App Link](https://img.shields.io/badge/Live%20Demo-Available-brightgreen)](https://www.surfhash.net/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Overview
@@ -16,7 +16,7 @@ Seek solves the critical problem of file discovery and search in the Filecoin/IP
 - **Incentivized Content Creation**: Rewards contributors for valuable content
 - **Efficient Discovery**: Advanced search capabilities for Filecoin/IPFS content
 
-**App Link**: [https://seek-six.vercel.app/](https://seek-six.vercel.app/)
+**App Link**: [https://www.surfhash.net/](https://www.surfhash.net/)
 
 ## Features
 
