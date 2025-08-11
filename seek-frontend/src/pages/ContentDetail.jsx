@@ -9,6 +9,7 @@ import axios from 'axios';
 import { backendUrl, TIP_CONTRACT_ADDRESS, ipfsUrl } from '../lib/constants';
 import { TIP_CONTRACT_ABI } from '../lib/tipABI';
 import { useContractRead } from 'wagmi';
+import { formatFileSize } from '../utils/fileSize';
 import './css/ContentDetail.css';
 
 const ContentDetail = () => {
@@ -248,7 +249,7 @@ const ContentDetail = () => {
                                     {content.file_size && (
                                         <div className="info-item">
                                             <span className="label">File Size:</span>
-                                            <span className="value">{content.file_size}</span>
+                                            <span className="value">{formatFileSize(content.file_size)}</span>
                                         </div>
                                     )}
                                     {content.network && (
