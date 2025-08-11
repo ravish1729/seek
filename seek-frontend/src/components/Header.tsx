@@ -68,7 +68,7 @@ export function Header() {
                             {tipsLoading ? (
                                 <span className="tips-loading">Loading...</span>
                             ) : (
-                                <span className="tips-display">💰 {tips !== null ? tips.toFixed(4) : '0.0000'} FIL</span>
+                                <span className="tips-display">💰 {tips !== null ? tips.toFixed(4) : '0.0000'} POL</span>
                             )}
                         </div>
                     </div>
