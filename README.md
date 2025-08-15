@@ -1,4 +1,4 @@
-# Seek 🔍
+# SurfHash 🔍
 
 > An incentive-based file tagging application for the Filecoin/IPFS ecosystem
 
